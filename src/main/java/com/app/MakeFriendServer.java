@@ -1,5 +1,6 @@
 package com.app;
 
+import com.github.xiaoymin.knife4j.spring.annotations.EnableKnife4j;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,6 +14,7 @@ import java.net.UnknownHostException;
  * @author 舒润
  */
 @Slf4j
+@EnableKnife4j
 @SpringBootApplication
 public class MakeFriendServer {
     public static void main(String[] args) {
