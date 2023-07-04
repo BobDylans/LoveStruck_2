@@ -77,3 +77,5 @@ wget https://github.com/rabbitmq/rabbitmq-delayed-message-exchange/releases/down
 #执行命令
 rabbitmq-plugins enable rabbitmq_delayed_message_exchange
 ```
+1. 使用 DelayProduer 将消息发送到延迟队列，
+2. 使用 DelayConsumer 接收处理消息
