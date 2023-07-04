@@ -70,5 +70,4 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer{
         simpMessagingTemplate.convertAndSend("/topic/receive",message);
     }
 ```
-
 ## 
