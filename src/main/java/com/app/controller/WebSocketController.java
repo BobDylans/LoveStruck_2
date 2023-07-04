@@ -1,6 +1,10 @@
 package com.app.controller;
 
 import io.swagger.annotations.Api;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -10,7 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Api("websocket 连接控制器")
 @RestController
-@RequestMapping("ws")
+@MessageMapping("/app")
 public class WebSocketController {
+
+    @Autowired
+    private SimpMessagingTemplate messagingTemplate;
 
 }
