@@ -69,4 +69,11 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer{
         simpMessagingTemplate.convertAndSend("/topic/receive",message);
     }
 ```
-## 
+## 使用rabbitmq
+### 添加rabbitmq的延迟插件
+```shell
+#将安装包放到 安装目录的plugins下
+wget https://github.com/rabbitmq/rabbitmq-delayed-message-exchange/releases/download/3.9.0/rabbitmq_delayed_message_exchange-3.9.0.ez
+#执行命令
+rabbitmq-plugins enable rabbitmq_delayed_message_exchange
+```
