@@ -53,22 +53,7 @@ create table profile
     political           int          default 0    null comment '政治面貌',
     favorite            text                      null comment '爱好'
 )comment '个人资料表;';
--- auto-generated definition
-create table user
-(
-    id         bigint auto_increment comment '用户id'
-        primary key,
-    profile_id bigint                             null comment '用户资料 id',
-    username   varchar(255)                       null comment '用户名',
-    address_id varchar(255)                       null comment '地址id',
-    avatar     varchar(255) default 'default.jpg' null comment '用户头像',
-    role       int          default 0             null comment '用户角色',
-    gender     int          default 0             null comment '性别',
-    password   varchar(255) default '12345'       null comment '个人密码',
-    emil       varchar(255)                       null comment '个人邮箱',
-    age        int                                null comment '年龄',
-    status     int          default 1             null comment '是否上线'
-)comment '用户表;';
+
 DROP TABLE IF EXISTS address;
 CREATE TABLE address(
                         `id` bigint auto_increment comment '地址id' ,
