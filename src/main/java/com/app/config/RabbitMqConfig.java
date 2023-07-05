@@ -1,13 +1,13 @@
 package com.app.config;
 
 import com.app.common.constant.DelayMessage;
-import org.springframework.amqp.core.Binding;
-import org.springframework.amqp.core.BindingBuilder;
-import org.springframework.amqp.core.CustomExchange;
-import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
+import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -31,6 +31,9 @@ public class RabbitMqConfig {
     @Value("${spring.rabbitmq.virtual-host}")
     private String virtual_host;
 
+    @Autowired
+    private Receiver receiver;
+
     @Bean(name = "connectionFactory")
     public ConnectionFactory connectionFactory() {
         CachingConnectionFactory connectionFactory = new CachingConnectionFactory(host, port);
@@ -40,9 +43,53 @@ public class RabbitMqConfig {
         return connectionFactory;
     }
 
+
     @Bean
-    public RabbitTemplate rabbitTemplate() {
-        return new RabbitTemplate(connectionFactory());
+    public RabbitTemplate rabbitTemplate(){
+        RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory());
+        // 发送方确认，回调函数
+        rabbitTemplate.setConfirmCallback(confirmCallback());
+        // 开启失败通知
+        rabbitTemplate.setMandatory(true);
+        //  发送失败回调函数
+        rabbitTemplate.setReturnCallback(returnsCallback());
+        return rabbitTemplate;
+    }
+
+    @Bean
+    public RabbitTemplate.ConfirmCallback confirmCallback(){
+        return new RabbitTemplate.ConfirmCallback() {
+            @Override
+            public void confirm(CorrelationData correlationData, boolean ack, String cause) {
+                if (ack) {
+                    System.out.println("Message successfully sent to RabbitMq!");
+                } else {
+                    System.out.println("Message not sent to RabbitMq! Confirm callback returned " + cause);
+                }
+            }
+        };
+    }
+
+    @Bean
+    public RabbitTemplate.ReturnsCallback returnsCallback(){
+        return new RabbitTemplate.ReturnsCallback() {
+            @Override
+            public void returnedMessage(ReturnedMessage returnedMessage){
+                System.out.println("returnedMessage = " + returnedMessage);
+            }
+        };
+    }
+
+    @Bean
+    public SimpleMessageListenerContainer messageListenerContainer(){
+        SimpleMessageListenerContainer container = new SimpleMessageListenerContainer(connectionFactory());
+        // 绑定队列
+        container.setQueues(delayQueue());
+        // 手动提交
+        container.setAcknowledgeMode(AcknowledgeMode.MANUAL);
+        // 消费确认
+        container.setMessageListener(receiver);
+        return container;
     }
 
     /**
