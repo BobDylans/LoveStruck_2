@@ -23,6 +23,7 @@
         <diboot.version>2.9.0</diboot.version>
         <knife4j.version>3.0.3</knife4j.version>
         <hutools.version>5.8.19</hutools.version>
+        <mybatis-plus-join.version>1.4.5</mybatis-plus-join.version>
     </properties>
 
     <dependencies>
@@ -49,6 +50,11 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.yulichang</groupId>
+            <artifactId>mybatis-plus-join-boot-starter</artifactId>
+            <version>${mybatis-plus-join.version}</version>
         </dependency>
         <dependency>
             <groupId>com.github.xiaoymin</groupId>

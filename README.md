@@ -79,3 +79,6 @@ rabbitmq-plugins enable rabbitmq_delayed_message_exchange
 ```
 1. 使用 common的 DelayProduer 将消息发送到延迟队列，
 2. 使用 common的 DelayConsumer 接收处理消息
+## 使用mybatis-plus-join
+- 查看官网教程
+- https://mybatisplusjoin.com/pages/quickstart/az.html

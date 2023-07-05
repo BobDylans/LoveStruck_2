@@ -15,10 +15,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
+import org.springframework.data.annotation.Id;
 
 /**
 * 
-* @TableName comments
+* @author 舒润
+ * @TableName comments
 */
 @Data
 @ApiModel("评论文档")
@@ -30,23 +32,24 @@ public class Comments implements Serializable {
     /**
     * 
     */
+    @Id
     @ApiModelProperty("")
-    private Object id;
+    private String id;
     /**
     * 
     */
     @ApiModelProperty("")
-    private Object parentId;
+    private String parentId;
     /**
     * 
     */
     @ApiModelProperty("")
-    private Object content;
+    private String content;
     /**
     * 
     */
     @ApiModelProperty("")
-    private Object userId;
+    private String userId;
     /**
     * 
     */
