@@ -13,6 +13,6 @@ import lombok.extern.slf4j.Slf4j;
  * Copyright © MyCompany
  */
 @Slf4j
-public class BaseCustomCrudRestController<E extends BaseEntity> extends BaseCrudRestController<E> {
+public class BaseCustomCrudRestController <E extends BaseEntity> extends BaseCrudRestController<E> {
 
 }
