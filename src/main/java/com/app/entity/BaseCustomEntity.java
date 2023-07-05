@@ -17,7 +17,7 @@ import lombok.experimental.Accessors;
 */
 @Getter @Setter @Accessors(chain = true)
 public abstract class BaseCustomEntity extends BaseEntity {
-    private static final long serialVersionUID = -3534537853397076121L;
+    private static final long serialVersionUID = 5103301545836385501L;
 
     @Schema(hidden = true)
     @TableId(type = IdType.AUTO)
