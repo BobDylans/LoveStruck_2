@@ -52,31 +52,29 @@ public class RabbitMqConfig {
         // 开启失败通知
         rabbitTemplate.setMandatory(true);
         //  发送失败回调函数
-        rabbitTemplate.setReturnCallback(returnsCallback());
+        rabbitTemplate.setReturnsCallback(returnsCallback());
         return rabbitTemplate;
     }
 
     @Bean
     public RabbitTemplate.ConfirmCallback confirmCallback(){
-        return new RabbitTemplate.ConfirmCallback() {
-            @Override
-            public void confirm(CorrelationData correlationData, boolean ack, String cause) {
-                if (ack) {
-                    System.out.println("Message successfully sent to RabbitMq!");
-                } else {
-                    System.out.println("Message not sent to RabbitMq! Confirm callback returned " + cause);
-                }
+        return (correlationData,ack,cause)->{
+            if (ack) {
+                System.out.println("Message successfully sent to RabbitMq!");
+            } else {
+                System.out.println("Message not sent to RabbitMq! Confirm callback returned " + cause);
             }
         };
     }
 
     @Bean
     public RabbitTemplate.ReturnsCallback returnsCallback(){
-        return new RabbitTemplate.ReturnsCallback() {
-            @Override
-            public void returnedMessage(ReturnedMessage returnedMessage){
-                System.out.println("returnedMessage = " + returnedMessage);
-            }
+        return returnedMessage -> {
+            // 处理发送失败的消息
+            System.out.println("消息发送失败，交换机：" + returnedMessage.getExchange() + "，路由键：" + returnedMessage.getRoutingKey() + "，回应码：" + returnedMessage.getReplyCode() + "，回应信息：" + returnedMessage.getReplyText());
+            // 重新发送
+            rabbitTemplate().send(returnedMessage.getExchange(),returnedMessage.getRoutingKey(), returnedMessage.getMessage());
+            System.out.println("returnedMessage = " + returnedMessage);
         };
     }
 
@@ -97,7 +95,7 @@ public class RabbitMqConfig {
      */
     @Bean("delayQueue")
     public Queue delayQueue(){
-        Queue queue = new Queue(DelayMessage.DELAY_QUEUE, true, false, true);
+        Queue queue = new Queue(DelayMessage.DELAY_QUEUE, true, false, false);
         return queue;
     }
     @Bean("delayExchange")
@@ -117,5 +115,4 @@ public class RabbitMqConfig {
                 .with(DelayMessage.DELAY_ROUTE_KEY).noargs();
         return binding;
     }
-
 }
