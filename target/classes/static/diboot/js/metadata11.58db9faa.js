@@ -1,0 +1,1 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["metadata11"],{"45d0":function(e,a,t){"use strict";t.r(a),a["default"]={metadata:{primaryKey:"id",fixAction:!1,editTable:"NONE",rowSelection:"NONE",columns:[],enableTree:!1},scriptConfig:{data:[{key:"customQueryParam",name:"查询对象",type:"Object"}],methods:[{key:"getList",name:"获取列表",params:[]}]}}}}]);

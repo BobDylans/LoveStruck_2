@@ -1,0 +1,1 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["metadata4"],{"57af":function(e,a,t){"use strict";t.r(a),a["default"]={metadata:{primaryKey:"id",columns:[],colNumber:1,enableTree:!1,relationColumnsMap:{}},scriptConfig:{methods:[]}}},"938f":function(e,a,t){"use strict";t.r(a),a["default"]={metadata:{searchColumn:[],fieldNameList:[],placeholder:"请输入搜索关键词"}}}}]);
