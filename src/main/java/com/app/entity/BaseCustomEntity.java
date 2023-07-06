@@ -12,12 +12,12 @@ import lombok.experimental.Accessors;
 * 自定义BaseEntity，对diboot-core的BaseEntity做差异化定义
 * @author shurun
 * @version 1.0
-* @date 2023-07-05
+* @date 2023-07-06
 * Copyright © MyCompany
 */
 @Getter @Setter @Accessors(chain = true)
 public abstract class BaseCustomEntity extends BaseEntity {
-    private static final long serialVersionUID = 5103301545836385501L;
+    private static final long serialVersionUID = 8876015377100202083L;
 
     @Schema(hidden = true)
     @TableId(type = IdType.AUTO)

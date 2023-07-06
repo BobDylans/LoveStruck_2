@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 * 通用异常处理类
 * @author shurun
 * @version 1.0
-* @date 2023-07-05
+* @date 2023-07-06
 * Copyright © MyCompany
 */
 @ControllerAdvice

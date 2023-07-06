@@ -8,7 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 * 自定义 BaseService 接口实现
 * @author shurun
 * @version 1.0
-* @date 2023-07-05
+* @date 2023-07-06
  * Copyright © MyCompany
 */
 @Slf4j

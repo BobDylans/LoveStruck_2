@@ -18,7 +18,7 @@ import java.util.List;
  *
  * @author shurun
  * @version 1.0
- * @date 2023-07-05
+ * @date 2023-07-06
  * Copyright © MyCompany
  */
 @Tag(name = "数据字典", description = "数据字典相关CRUD接口")

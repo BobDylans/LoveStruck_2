@@ -18,7 +18,7 @@ import java.util.Map;
  *
  * @author shurun
  * @version 1.0
- * @date 2023-07-05
+ * @date 2023-07-06
  * Copyright © MyCompany
  */
 @Tag(name = "通用", description = "通用接口")
