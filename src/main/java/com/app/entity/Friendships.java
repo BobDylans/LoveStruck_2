@@ -29,7 +29,7 @@ import lombok.experimental.Accessors;
 @Schema(name = "好友关系表;", description = "好友关系表; 实体定义")
 @Getter @Setter @Accessors(chain = true)
 @TableName("friendships")
-public class  Friendships extends  BaseCustomEntity {
+public class Friendships extends  BaseCustomEntity {
     private static final long serialVersionUID = -1031625276344778135L;
 
     /**
