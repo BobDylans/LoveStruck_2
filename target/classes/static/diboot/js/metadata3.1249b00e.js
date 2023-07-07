@@ -1,1 +1,0 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["metadata3"],{"2e37":function(o,t,a){"use strict";a.r(t),t["default"]={metadata:{bgColor:"#fdf6ec",color:"#ff9900",mode:"horizontal",volumeIcon:!0,moreIcon:!0,type:"warning"}}},"9b37":function(o,t,a){"use strict";a.r(t),t["default"]={metadata:{columns:[]}}}}]);

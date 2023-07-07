@@ -1,5 +1,6 @@
 package com.app.controller.a;
 
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -29,6 +30,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/category")
 @Slf4j
+@Api("标签种类")
 public class CategoryController extends BaseCustomCrudRestController<Category> {
     @Autowired
     private CategoryService categoryService;

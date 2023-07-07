@@ -5,6 +5,9 @@ import com.diboot.core.dto.AttachMoreDTO;
 import com.diboot.core.entity.ValidList;
 import com.diboot.core.vo.JsonResult;
 import com.diboot.core.vo.LabelValue;
+import com.diboot.iam.config.Cons;
+import com.diboot.iam.util.IamSecurityUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.Operation;
@@ -22,7 +25,7 @@ import java.util.Map;
  * Copyright © MyCompany
  */
 @Tag(name = "通用", description = "通用接口")
-
+@Slf4j
 @RestController
 @RequestMapping("/common")
 public class CommonController extends BaseController {
@@ -57,6 +60,26 @@ public class CommonController extends BaseController {
                                                          @PathVariable(value = "parentValue", required = false) String parentValue,
                                                          @PathVariable(value = "parentType", required = false) String parentType) {
         return JsonResult.OK(super.attachMoreRelatedData(attachMoreDTO, parentValue, parentType));
+    }
+    /**
+     * attachMore对象 自定义权限检查点
+     *
+     * @param attachMore
+     * @return 返回true放行
+     */
+    @Override
+    protected boolean attachMoreSecurityCheck(AttachMoreDTO attachMore) {
+        // 超级管理员
+        if (IamSecurityUtils.getSubject().hasRole(Cons.ROLE_SUPER_ADMIN)) {
+            return true;
+        }
+        try {
+            IamSecurityUtils.getSubject().checkPermission(attachMore.getTarget() + ":read");
+        } catch (Exception e) {
+            log.warn("无权获取attachMore: {}", attachMore.getTarget());
+            return false;
+        }
+        return true;
     }
 
 }

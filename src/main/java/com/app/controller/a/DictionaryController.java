@@ -9,6 +9,8 @@ import com.diboot.core.util.V;
 import com.diboot.core.vo.*;
 import com.diboot.core.entity.Dictionary;
 import com.diboot.core.controller.BaseCrudRestController;
+import com.diboot.iam.annotation.OperationCons;
+import com.diboot.iam.annotation.BindPermission;
 import lombok.extern.slf4j.Slf4j;
 import javax.validation.Valid;
 import java.util.List;
@@ -24,6 +26,7 @@ import java.util.List;
 @Tag(name = "数据字典", description = "数据字典相关CRUD接口")
 @RestController
 @RequestMapping("/dictionary")
+@BindPermission(name = "数据字典")
 @Slf4j
 public class DictionaryController extends BaseCrudRestController<Dictionary> {
 
@@ -37,6 +40,7 @@ public class DictionaryController extends BaseCrudRestController<Dictionary> {
      * @throws Exception
      */
     @Operation(summary = "获取列表分页数据")
+    @BindPermission(name = OperationCons.LABEL_LIST, code = OperationCons.CODE_READ)
     @GetMapping("/list")
     public JsonResult getViewObjectListMapping(Dictionary entity, Pagination pagination) throws Exception{
         return super.getViewObjectList(entity, pagination, DictionaryVO.class);
@@ -50,6 +54,7 @@ public class DictionaryController extends BaseCrudRestController<Dictionary> {
      * @throws Exception
      */
     @Operation(summary = "根据ID获取详情数据")
+    @BindPermission(name = OperationCons.LABEL_DETAIL, code = OperationCons.CODE_READ)
     @GetMapping("/{id}")
     public JsonResult getViewObjectMapping(@PathVariable("id") Long id) throws Exception{
         return super.getViewObject(id, DictionaryVO.class);
@@ -63,6 +68,7 @@ public class DictionaryController extends BaseCrudRestController<Dictionary> {
      * @throws Exception
      */
     @Operation(summary = "新建数据")
+    @BindPermission(name = OperationCons.LABEL_CREATE, code = OperationCons.CODE_WRITE)
     @PostMapping("/")
     public JsonResult createEntityMapping(@RequestBody @Valid DictionaryVO entityVO) throws Exception {
         boolean success = dictionaryService.createDictAndChildren(entityVO);
@@ -80,6 +86,7 @@ public class DictionaryController extends BaseCrudRestController<Dictionary> {
      * @throws Exception
      */
     @Operation(summary = "根据ID更新数据")
+    @BindPermission(name = OperationCons.LABEL_UPDATE, code = OperationCons.CODE_WRITE)
     @PutMapping("/{id}")
     public JsonResult updateEntityMapping(@PathVariable("id")Long id, @Valid @RequestBody DictionaryVO entityVO) throws Exception {
         entityVO.setId(id);
@@ -98,6 +105,7 @@ public class DictionaryController extends BaseCrudRestController<Dictionary> {
      * @throws Exception
      */
     @Operation(summary = "根据ID删除数据")
+    @BindPermission(name = OperationCons.LABEL_DELETE, code = OperationCons.CODE_WRITE)
     @DeleteMapping("/{id}")
     public JsonResult deleteEntityMapping(@PathVariable("id")Long id) throws Exception {
         boolean success = dictionaryService.deleteDictAndChildren(id);

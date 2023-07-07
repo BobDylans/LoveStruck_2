@@ -1,5 +1,6 @@
 package com.app.controller.a;
 
+import com.diboot.iam.entity.IamUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -45,6 +46,7 @@ public class MatchedController extends BaseCustomCrudRestController<Matched> {
     @Operation(summary = "获取列表分页数据")
     @GetMapping("/list")
     public JsonResult getViewObjectListMapping(MatchedDTO queryDto, Pagination pagination) throws Exception{
+
     		return super.getViewObjectList(queryDto, pagination, MatchedListVO.class);
     }   
 

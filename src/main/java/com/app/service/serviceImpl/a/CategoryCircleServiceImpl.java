@@ -5,6 +5,7 @@ import com.app.entity.CategoryCircle;
 import com.app.mapper.a.CategoryCircleMapper;
 import com.app.service.a.CategoryCircleService;
 import com.app.service.serviceImpl.a.BaseCustomServiceImpl;
+import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
